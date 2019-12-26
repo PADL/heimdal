@@ -97,6 +97,7 @@ mechsrc = \
 	mech/gss_context_time.c \
 	mech/gss_create_empty_oid_set.c \
 	mech/gss_cred.c \
+	mech/gss_cred_hold.c \
 	mech/gss_decapsulate_token.c \
 	mech/gss_delete_name_attribute.c \
 	mech/gss_delete_sec_context.c \

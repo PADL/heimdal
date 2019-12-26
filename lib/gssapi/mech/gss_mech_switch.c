@@ -392,8 +392,10 @@ _gss_load_mech(void)
 #if 0
 		OPTSYM(iter_creds);
 		OPTSYM(destroy_cred);
+#endif
 		OPTSYM(cred_hold);
 		OPTSYM(cred_unhold);
+#if 0
 		OPTSYM(cred_label_get);
 		OPTSYM(cred_label_set);
 #endif
