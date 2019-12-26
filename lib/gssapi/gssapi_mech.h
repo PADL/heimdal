@@ -663,4 +663,16 @@ gss_mg_set_error_string(gss_OID mech,
                        OM_uint32 maj, OM_uint32 min,
                        const char *fmt, ...);
 
+OM_uint32
+gss_mg_gen_cb(OM_uint32 *minor_status,
+	      const gss_channel_bindings_t b,
+	      uint8_t p[16],
+	      gss_buffer_t buffer);
+
+OM_uint32
+gss_mg_validate_cb(OM_uint32 *minor_status,
+		  const gss_channel_bindings_t b,
+		  const uint8_t p[16],
+		  gss_buffer_t buffer);
+
 #endif /* GSSAPI_MECH_H */

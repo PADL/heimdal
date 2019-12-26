@@ -92,6 +92,7 @@ mechsrc = \
 	mech/gss_aeap.c \
 	mech/gss_buffer_set.c \
 	mech/gss_canonicalize_name.c \
+	mech/gss_cb.c \
 	mech/gss_compare_name.c \
 	mech/gss_context_time.c \
 	mech/gss_create_empty_oid_set.c \
