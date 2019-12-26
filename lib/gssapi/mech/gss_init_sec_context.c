@@ -141,6 +141,9 @@ gss_init_sec_context(OM_uint32 * minor_status,
 	if (time_rec)
 	    *time_rec = 0;
 
+	if (mech_type == GSS_C_NO_OID)
+	    mech_type = GSS_KRB5_MECHANISM;
+
 	_gss_mg_check_name(target_name);
 	_gss_mg_check_credential(initiator_cred_handle);
 
@@ -155,9 +158,6 @@ gss_init_sec_context(OM_uint32 * minor_status,
 	 * sure we use the same mechanism switch as before.
 	 */
 	if (!ctx) {
-		if (mech_type == NULL)
-			mech_type = GSS_KRB5_MECHANISM;
-
 		ctx = malloc(sizeof(struct _gss_context));
 		if (!ctx) {
 			*minor_status = ENOMEM;
