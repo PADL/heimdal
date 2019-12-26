@@ -31,6 +31,8 @@ HEIMDAL_GSS_2.0 {
 		gss_create_empty_oid_set;
 		gss_cred_hold;
 		gss_cred_unhold;
+		gss_cred_label_get;
+		gss_cred_label_set;
 		gss_decapsulate_token;
 		gss_delete_name_attribute;
 		gss_delete_sec_context;

@@ -1214,6 +1214,20 @@ gss_cred_hold(OM_uint32 *min_stat, gss_cred_id_t cred_handle);
 GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_CALL
 gss_cred_unhold(OM_uint32 *min_stat, gss_cred_id_t cred_handle);
 
+GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_CALL
+gss_cred_label_get(OM_uint32 *min_stat,
+		   gss_cred_id_t cred_handle,
+		   const char *label,
+		   gss_buffer_t value);
+
+GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_CALL
+gss_cred_label_set(OM_uint32 *min_stat,
+		   gss_cred_id_t cred_handle,
+		   const char *label,
+		   gss_buffer_t value);
+
+typedef gss_const_OID gss_iter_OID;
+
 GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_FUNCTION
 gss_iter_creds_f(OM_uint32 *min_stat,
 		 OM_uint32 flags,

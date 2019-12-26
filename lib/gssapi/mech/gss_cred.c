@@ -235,3 +235,52 @@ gss_import_cred(OM_uint32 * minor_status,
 
 }
 
+OM_uint32
+gss_cred_label_get(OM_uint32 *min_stat,
+		   gss_cred_id_t cred_handle,
+		   const char *label,
+		   gss_buffer_t value)
+{
+    struct _gss_cred *cred = (struct _gss_cred *)cred_handle;
+    struct _gss_mechanism_cred *mc;
+    OM_uint32 maj_stat;
+
+    *min_stat = 0;
+    _mg_buffer_zero(value);
+
+    HEIM_TAILQ_FOREACH(mc, &cred->gc_mc, gmc_link) {
+
+	if (mc->gmc_mech->gm_cred_label_get == NULL)
+	    continue;
+
+	maj_stat = mc->gmc_mech->gm_cred_label_get(min_stat, mc->gmc_cred,
+						   label, value);
+	if (maj_stat == GSS_S_COMPLETE)
+	    return GSS_S_COMPLETE;
+    }
+
+    return GSS_S_UNAVAILABLE;
+}
+
+OM_uint32
+gss_cred_label_set(OM_uint32 *min_stat,
+		   gss_cred_id_t cred_handle,
+		   const char *label,
+		   gss_buffer_t value)
+{
+    struct _gss_cred *cred = (struct _gss_cred *)cred_handle;
+    struct _gss_mechanism_cred *mc;
+
+    *min_stat = 0;
+
+    HEIM_TAILQ_FOREACH(mc, &cred->gc_mc, gmc_link) {
+
+	if (mc->gmc_mech->gm_cred_label_set == NULL)
+	    continue;
+
+	(void)mc->gmc_mech->gm_cred_label_set(min_stat, mc->gmc_cred,
+					      label, value);
+    }
+
+    return GSS_S_COMPLETE;
+}

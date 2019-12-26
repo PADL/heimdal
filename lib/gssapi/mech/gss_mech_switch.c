@@ -398,10 +398,8 @@ _gss_load_mech(void)
 		OPTSYM(destroy_cred);
 		OPTSYM(cred_hold);
 		OPTSYM(cred_unhold);
-#if 0
 		OPTSYM(cred_label_get);
 		OPTSYM(cred_label_set);
-#endif
 		OPTSYM(display_name_ext);
 		OPTSYM(inquire_name);
 		OPTSYM(get_name_attribute);
