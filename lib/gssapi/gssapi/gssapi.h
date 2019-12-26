@@ -1214,10 +1214,25 @@ gss_cred_hold(OM_uint32 *min_stat, gss_cred_id_t cred_handle);
 GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_CALL
 gss_cred_unhold(OM_uint32 *min_stat, gss_cred_id_t cred_handle);
 
+GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_FUNCTION
+gss_iter_creds_f(OM_uint32 *min_stat,
+		 OM_uint32 flags,
+		 gss_const_OID mech,
+		 void *userctx,
+		 void (*useriter)(void *, gss_iter_OID, gss_cred_id_t));
+
 GSSAPI_CPP_END
 
 #if defined(__APPLE__) && (defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__))
 #pragma pack(pop)
+#endif
+
+#ifdef __BLOCKS__
+GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_FUNCTION
+gss_iter_creds(OM_uint32 *min_stat,
+	       OM_uint32 flags,
+	       gss_const_OID mech,
+	       void (^useriter)(gss_iter_OID, gss_cred_id_t));
 #endif
 
 #undef GSSAPI_DEPRECATED_FUNCTION

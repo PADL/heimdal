@@ -135,6 +135,7 @@ mechsrc = \
 	mech/gss_import_sec_context.c \
 	mech/gss_indicate_mechs.c \
 	mech/gss_init_sec_context.c \
+	mech/gss_iter_cred.c \
 	mech/gss_inquire_context.c \
 	mech/gss_inquire_cred.c \
 	mech/gss_inquire_cred_by_mech.c \
@@ -142,6 +143,7 @@ mechsrc = \
 	mech/gss_inquire_mechs_for_name.c \
 	mech/gss_inquire_name.c \
 	mech/gss_inquire_names_for_mech.c \
+	mech/gss_iter_cred.c \
 	mech/gss_krb5.c \
 	mech/gss_mech_switch.c \
 	mech/gss_mo.c \
@@ -372,6 +374,7 @@ libgssapi_OBJs = \
 	$(OBJ)\mech/gss_import_sec_context.obj \
 	$(OBJ)\mech/gss_indicate_mechs.obj \
 	$(OBJ)\mech/gss_init_sec_context.obj \
+	$(OBJ)\mech/gss_iter_cred.obj \
 	$(OBJ)\mech/gss_inquire_context.obj \
 	$(OBJ)\mech/gss_inquire_cred.obj \
 	$(OBJ)\mech/gss_inquire_cred_by_mech.obj \
@@ -379,6 +382,7 @@ libgssapi_OBJs = \
 	$(OBJ)\mech/gss_inquire_mechs_for_name.obj \
 	$(OBJ)\mech/gss_inquire_name.obj \
 	$(OBJ)\mech/gss_inquire_names_for_mech.obj \
+	$(OBJ)\mech/gss_iter_cred.obj \
 	$(OBJ)\mech/gss_krb5.obj \
 	$(OBJ)\mech/gss_mech_switch.obj \
 	$(OBJ)\mech/gss_mo.obj \

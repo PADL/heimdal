@@ -389,10 +389,13 @@ _gss_load_mech(void)
 		OPTSYM(export_cred);
 		OPTSYM(import_cred);
 		OPTSYM(acquire_cred_from);
-#if 0
-		OPTSYM(iter_creds);
-		OPTSYM(destroy_cred);
+		/* XXX mechglue gss_iter_creds only exists with blocks */
+		m->gm_mech.gm_iter_creds = (_gss_iter_creds_t *)dlsym(so, "gss_iter_creds");
+#ifdef __BLOCKS__
+		if ((void *)m->gm_mech.gm_iter_creds == (void *)gss_iter_creds)
+		    m->gm_mech.gm_iter_creds = NULL;
 #endif
+		OPTSYM(destroy_cred);
 		OPTSYM(cred_hold);
 		OPTSYM(cred_unhold);
 #if 0
