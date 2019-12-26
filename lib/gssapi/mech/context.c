@@ -338,3 +338,37 @@ _gss_mg_log_cred(int level,
     free(str);
 }
 
+static const char *paths[] = {
+    LIBDIR "/plugin/gss",
+    NULL
+};
+
+static void
+load_plugins(void *ptr)
+{
+    struct mg_thread_ctx *mg;
+
+    mg = _gss_mechglue_thread();
+    if (mg && mg->context)
+	_krb5_load_plugins(mg->context, "gss", paths);
+}
+	
+void
+_gss_load_plugins(void)
+{
+    static heim_base_once_t once = HEIM_BASE_ONCE_INIT;
+    heim_base_once_f(&once, NULL, load_plugins);
+}
+
+uintptr_t GSSAPI_CALLCONV
+gss_get_instance(const char *libname)
+{
+    static const char *instance = "libgssapi";
+
+    if (strcmp(libname, "gssapi") == 0)
+	return (uintptr_t)instance;
+    else if (strcmp(libname, "krb5") == 0)
+	return krb5_get_instance(libname);
+
+    return 0;
+}

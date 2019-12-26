@@ -681,4 +681,7 @@ gss_mg_validate_cb(OM_uint32 *minor_status,
 		  const uint8_t p[16],
 		  gss_buffer_t buffer);
 
+uintptr_t
+gss_get_instance(const char *);
+
 #endif /* GSSAPI_MECH_H */
