@@ -1226,6 +1226,10 @@ gss_cred_label_set(OM_uint32 *min_stat,
 		   const char *label,
 		   gss_buffer_t value);
 
+GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_FUNCTION
+gss_destroy_cred(OM_uint32 *minor_status,
+		 gss_cred_id_t *cred_handle);
+
 typedef gss_const_OID gss_iter_OID;
 
 GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_FUNCTION

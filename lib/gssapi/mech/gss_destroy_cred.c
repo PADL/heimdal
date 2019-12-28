@@ -43,8 +43,8 @@
  * @ingroup gssapi
  */
 
-OM_uint32 GSSAPI_LIB_FUNCTION
-gss_destroy_cred(void *status,
+GSSAPI_LIB_FUNCTION OM_uint32 GSSAPI_LIB_FUNCTION
+gss_destroy_cred(OM_uint32 *minor_status,
 		 gss_cred_id_t *cred_handle)
 {
     struct _gss_cred *cred;
