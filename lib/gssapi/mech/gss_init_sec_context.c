@@ -141,6 +141,11 @@ gss_init_sec_context(OM_uint32 * minor_status,
 	if (time_rec)
 	    *time_rec = 0;
 
+	if (_gss_mg_log_level(1))
+	    log_init_sec_context(ctx, name, req_flags,
+				 (struct _gss_cred *)initiator_cred_handle,
+				 input_mech_type, input_token);
+
 	/*
 	 * If we haven't allocated a context yet, do so now and lookup
 	 * the mechanism switch table. If we have one already, make
@@ -159,6 +164,10 @@ gss_init_sec_context(OM_uint32 * minor_status,
 		m = ctx->gc_mech = __gss_get_mechanism(mech_type);
 		if (!m) {
 			free(ctx);
+			*minor_status = 0;
+			gss_mg_set_error_string(mech_type, GSS_S_BAD_MECH,
+						*minor_status,
+						"Unsupported mechanism requested");
 			return (GSS_S_BAD_MECH);
 		}
 		allocated_ctx = 1;
@@ -188,9 +197,14 @@ gss_init_sec_context(OM_uint32 * minor_status,
 
         if (initiator_cred_handle != GSS_C_NO_CREDENTIAL &&
             cred_handle == NULL) {
+	    *minor_status = 0;
             if (allocated_ctx)
                 free(ctx);
-            return GSS_S_NO_CRED;
+	    gss_mg_set_error_string(mech_type, GSS_S_UNAVAILABLE,
+				    *minor_status,
+				    "Credential for the requested mechanism "
+				    "not found in credential handle");
+            return GSS_S_UNAVAILABLE;
         }
 
 	major_status = m->gm_init_sec_context(minor_status,
@@ -216,6 +230,9 @@ gss_init_sec_context(OM_uint32 * minor_status,
 	} else {
 		*context_handle = (gss_ctx_id_t) ctx;
 	}
+
+	_gss_mg_log(1, "gss_isc: %s maj_stat: %d/%d",
+		    m->gm_name, (int)major_status, (int)*minor_status);
 
 	return (major_status);
 }
