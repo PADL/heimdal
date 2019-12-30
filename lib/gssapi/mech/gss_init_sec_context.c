@@ -30,8 +30,10 @@
 
 #include "mech_locl.h"
 
-static gss_cred_id_t
-_gss_mech_cred_find(gss_const_cred_id_t cred_handle, gss_OID mech_type)
+gss_cred_id_t
+_gss_mg_find_mech_cred(
+    gss_const_cred_id_t cred_handle,
+    gss_const_OID mech_type)
 {
 	struct _gss_cred *cred = (struct _gss_cred *)cred_handle;
 	struct _gss_mechanism_cred *mc;
